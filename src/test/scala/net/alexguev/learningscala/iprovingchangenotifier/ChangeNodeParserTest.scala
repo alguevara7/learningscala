@@ -25,7 +25,7 @@ class ChangeNodeParserTest extends AssertionsForJUnit with Environment {
         </A>
       </LI>
     	
-    when(xmlLoader.loadFromSecuredUrl("space/Tuesday+Lunch/blog/2010-11-01_1", "guevaraa", "#1engine3")).thenReturn(
+    when(xmlLoader.loadFromSecuredUrl("space/Tuesday+Lunch/blog/2010-11-01_1", "guevaraa", "")).thenReturn(
     	<DIV id="ricardo-content-info">Created by 
     		<A href="space/Lawrence+Ludlow">John Doe</A>. Last edited by 
     		<A href="space/Lawrence+Ludlow">John Doe</A>, 2 days ago.

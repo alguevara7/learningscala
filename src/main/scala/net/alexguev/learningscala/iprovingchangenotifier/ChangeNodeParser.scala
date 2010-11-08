@@ -12,7 +12,7 @@ trait ChangeNodeParserComponent { this: XmlLoaderComponent =>
     def author: Option[String] = {
       url match {
         case Some(url) => {
-          val page = xmlLoader.loadFromSecuredUrl(url, "guevaraa", "#1engine3")
+          val page = xmlLoader.loadFromSecuredUrl(url, "guevaraa", "")
           val contentInfoNode = page \\ "DIV" find { node => (node \ "@id").text == "ricardo-content-info" }
           contentInfoNode match {
             case Some(div) => 
