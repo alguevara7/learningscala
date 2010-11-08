@@ -10,10 +10,11 @@ class Notifier(val email: String) extends XmlLoaderComponent with ChangeNodePars
     val someXML = xmlLoader.loadFromUrl("http://i-proving.ca/space/snipsnap-index/Recent+Changes")
 
     val myChanges = ChangeNodeCollector.collect(someXML).
-      map { new ChangeNodeParser(_) }.
-      filter { _.author == "BC Holmes" }
-
+      map { new ChangeNodeParser(_) }.//map { p => println(p.author); p }.
+      filter { _.icon != Some("iconTag") }.
+      filter { _.author == Some("Alexei Guevara") }
+      
     println(myChanges map { _.toString } reduceLeft { _ + "\n\n" + _ })
   }
-
+  
 }

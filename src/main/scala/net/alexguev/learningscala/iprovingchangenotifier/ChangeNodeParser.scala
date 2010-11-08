@@ -9,10 +9,16 @@ trait ChangeNodeParserComponent { this: XmlLoaderComponent =>
 
   class ChangeNodeParser(val liContent: NodeSeq) {
 
+	  //what about only having
+	  // - who
+	  // - url
+	  // - kind
+	  // - title (different for comments, etc)
+	  
     def author: Option[String] = {
       url match {
         case Some(url) => {
-          val page = xmlLoader.loadFromSecuredUrl(url, "guevaraa", "")
+          val page = xmlLoader.loadFromSecuredUrl("http://i-proving.ca/" + url, "guevaraa", "")
           val contentInfoNode = page \\ "DIV" find { node => (node \ "@id").text == "ricardo-content-info" }
           contentInfoNode match {
             case Some(div) => 
@@ -36,6 +42,24 @@ trait ChangeNodeParserComponent { this: XmlLoaderComponent =>
         case None => None
       }
     }
+    
+    def icon: Option[String] = {
+      val url = (liContent \ "A").zipWithIndex.find { case (_, index) => index == 0 }
+      url match {
+        case Some((node, _)) => Some(node \ "@class" text)
+        case None => None
+      }
+    }
+
+    def title: Option[String] = {
+      val url = (liContent \ "A").zipWithIndex.find { case (_, index) => index == 0 }
+      url match {
+        case Some((node, _)) => Some(node \ "@title" text)
+        case None => None
+      }
+    }
+    
+    override def toString = List(icon.getOrElse("N/A"), title.getOrElse("N/A"), author.getOrElse("N/A"), url.getOrElse("-")).reduceLeft {_+" --- "+_}  
 
   }
 

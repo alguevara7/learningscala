@@ -28,7 +28,8 @@ trait XmlLoaderComponent {
     }
 
     def loadFromSecuredUrl(url: String, username: String, password: String): NodeSeq = {
-      loader.load(new URL("http://i-proving.ca/space/snipsnap-index/Recent+Changes"))
+    	println(url)
+      loader.load(new URL(url))
     }
 
   }
